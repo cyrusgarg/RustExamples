@@ -22,6 +22,31 @@ fn main() {
     println!("Sum: {}",sum);
     println!("Product: {}",product);
 
+    let greeting="Hello, world!";
+    println!("{}",greeting);
+
+    let mut name=String::from("Rust");
+    println!("Initial:{}",name);
+
+    name.push_str("Programming");
+    println!("After push: {}",name);
+
+    let replaced=name.replace("Rust","Systems");
+    println!("Replaced: {}",replaced);
+
+    println!("length: {}",name.len());
+
+    for ch in name.chars(){
+        print!("{}",ch);
+    }
+
+    println!();
+    let number=42;
+    let num_str=number.to_string();
+    println!("Number as string: {}",num_str);
+
+    
+
 }
 
 fn add(x:i32,y:i32)->i32{
