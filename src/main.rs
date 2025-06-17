@@ -1,6 +1,10 @@
-mod utils;
+ mod utils;
 use std::fmt::Debug;
-
+use std::fs;
+use std::error::Error;
+use std::fmt::Error;
+use std::io::Error;
+use core::error::Error;
 struct User{
     active:bool,
     username:String,
@@ -27,6 +31,17 @@ impl NoShape {
         0
     }
 }
+
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+enum Shape {
+    Circle(f64),
+    Square(f64),
+}
+
 
 fn main() {
     println!("Hello, world!");
@@ -99,6 +114,22 @@ fn main() {
 
     let rect=NoShape;
     println!("NoShape area: {}", rect.area()); // Calling the area method on NoShape
+
+    let circle = Shape::Circle(5.0);
+    let square = Shape::Square(4.0);
+    println!("Area of the circle: {}",calculate_area(circle));
+    println!("Area of square: {}",calculate_area(square));
+
+    let integer_point = Point { x: 5, y: 10 };
+    let float_point = Point { x: 1.5, y: 2.5 };
+    println!("Integer Point: ({}, {})", integer_point.x, integer_point.y);
+    println!("Float Point: ({}, {})", float_point.x, float_point.y);
+
+    let result: Result<String,Error> = fs::read_to_string("file.txt");
+    match result {
+        Result::Ok(content) => println!("File content: {}", content),
+        Result::Err(e) => println!("Error reading file: {:?}", e),
+    }
 }
 
 fn takes_ownership(s:String)->String{
@@ -126,4 +157,14 @@ fn update_string() {
     println!("Pointer: {:p}", my_string.as_ptr());
     my_string.push_str(", Rust!");
     println!("Updated string: {}", my_string);
+}
+
+fn calculate_area(shape: Shape)->f64 {
+    let ans=match shape {
+        Shape::Circle(radius) => std::f64::consts::PI * radius * radius,
+        Shape::Square(side) => side * side,
+        
+    };
+
+    return ans;
 }
