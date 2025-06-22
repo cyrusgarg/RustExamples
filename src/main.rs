@@ -2,9 +2,7 @@
 use std::fmt::Debug;
 use std::fs;
 use std::error::Error;
-use std::fmt::Error;
-use std::io::Error;
-use core::error::Error;
+
 struct User{
     active:bool,
     username:String,
@@ -125,11 +123,27 @@ fn main() {
     println!("Integer Point: ({}, {})", integer_point.x, integer_point.y);
     println!("Float Point: ({}, {})", float_point.x, float_point.y);
 
-    let result: Result<String,Error> = fs::read_to_string("file.txt");
-    match result {
-        Result::Ok(content) => println!("File content: {}", content),
-        Result::Err(e) => println!("Error reading file: {:?}", e),
+    // let result: Result<String,Error> = fs::read_to_string("file.txt");
+    // match result {
+    //     Result::Ok(content) => println!("File content: {}", content),
+    //     Result::Err(e) => println!("Error reading file: {:?}", e),
+    // }
+
+    let s = "Hello, world!";
+    let res = find_first_a(s); 
+    match res {
+        Some(index) => println!("First 'a' found at index: {}", index),
+        None => println!("No 'a' found in the string."),
+    }      
+}
+
+fn find_first_a(s: &str) -> Option<usize> {
+    for (i, c) in s.chars().enumerate() {
+        if c == 'a' {
+            return Some(i);
+        }
     }
+    None
 }
 
 fn takes_ownership(s:String)->String{
