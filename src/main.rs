@@ -1,7 +1,9 @@
- mod utils;
+mod utils;
+mod even;
+mod fib;
+use fib::fib;
+use crate::even::check_even;
 use std::fmt::Debug;
-use std::fs;
-use std::error::Error;
 
 struct User{
     active:bool,
@@ -134,8 +136,16 @@ fn main() {
     match res {
         Some(index) => println!("First 'a' found at index: {}", index),
         None => println!("No 'a' found in the string."),
-    }      
+    }  
+    let num = 32;
+    println!("Is Number Even? {}",check_even(num));    
+
+    let fib_num = 10;
+    let fib_result = fib(fib_num);
+    println!("Fibonacci of {} is {}", fib_num, fib_result);
 }
+
+
 
 fn find_first_a(s: &str) -> Option<usize> {
     for (i, c) in s.chars().enumerate() {
@@ -182,3 +192,5 @@ fn calculate_area(shape: Shape)->f64 {
 
     return ans;
 }
+
+
